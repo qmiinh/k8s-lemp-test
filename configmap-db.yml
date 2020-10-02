@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-db
+data:
+  MYSQL_ROOT_PASSWORD: "P@ssw0rd"
+  MYSQL_DATABASE: "lavarel"
+  MYSQL_USER: "keepwalking"
+  MYSQL_PASSWORD: "P@ssw0rd"
+

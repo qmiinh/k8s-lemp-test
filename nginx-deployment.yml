@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    Deployment: LEMP
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: LEMP-nginx
+        image: qmiinhh/swarm-test:nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: volume-nginx
+          mountPath: /var/www/html
+      volumes:
+      - name: volume-nginx
+        hostPath:
+          path: /src
+          type: DirectoryOrCreate

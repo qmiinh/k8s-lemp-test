@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database-deployment
+  labels:
+    Deployment: LEMP
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: dbi
+    spec:
+      containers:
+      - name: LEMP-db
+        image: mariadb:latest
+        envFrom:
+        - configMapRef:
+            name: configmap-db
+        volumeMounts:
+        - name: volume-db
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: volume-db
+        hostPath:
+          path: /home/data/mysql
+          type: DirectoryOrCreate
+      nodeSelector:
+        kubernetes.io/hostname: k8s-node1

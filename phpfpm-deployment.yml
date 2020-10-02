@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpfpm-deployment
+  labels:
+    Deployment: LEMP
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpfpm
+  template:
+    metadata:
+      labels:
+        app: phpfpm
+    spec:
+      containers:
+      - name: LEMP-phpfpm
+        image: qmiinhh/swarm-test:php
+      volumes:
+      - name: volume-phpfpm
+        mountPath: /var/www/html
+      volumes:
+      - name: volume-phpfpm
+        hostPath:
+          path: /src
+          type: DirectoryOrCreate
