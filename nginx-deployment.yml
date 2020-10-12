@@ -2,10 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-deployment
+  namespace: lemp-ns
   labels:
-    Deployment: LEMP
+    Deployment: lemp
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: nginx
@@ -15,8 +16,8 @@ spec:
         app: nginx
     spec:
       containers:
-      - name: LEMP-nginx
-        image: qmiinhh/swarm-test:nginx
+      - name: lemp-nginx
+        image: registry.gitlab.com/qminhh/test/k8s-nginx:latest1 
         ports:
         - containerPort: 80
         volumeMounts:
@@ -26,4 +27,3 @@ spec:
       - name: volume-nginx
         hostPath:
           path: /src
-          type: DirectoryOrCreate

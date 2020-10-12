@@ -2,10 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: phpfpm-deployment
+  namespace: lemp-ns
   labels:
-    Deployment: LEMP
+    Deployment: lemp
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: phpfpm
@@ -15,13 +16,14 @@ spec:
         app: phpfpm
     spec:
       containers:
-      - name: LEMP-phpfpm
-        image: qmiinhh/swarm-test:php
-      volumes:
-      - name: volume-phpfpm
-        mountPath: /var/www/html
+      - name: lemp-phpfpm
+        image: registry.gitlab.com/qminhh/test/k8s-test:php
+        ports:
+        - containerPort: 9000
+        volumeMounts:
+        - name: volume-phpfpm
+          mountPath: /var/www/html
       volumes:
       - name: volume-phpfpm
         hostPath:
           path: /src
-          type: DirectoryOrCreate

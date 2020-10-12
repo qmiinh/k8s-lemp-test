@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: phpfpm-service
   namespace: lemp-ns
   labels:
-    service: nginx
+    service: phpfpm
 spec:
   selector:
-    app: nginx
+    app: phpfpm 
   type: NodePort
   ports:
   - name: port-nginx
-    port: 8080
-    targetPort: 80
+    port: 9000
+    targetPort: 9000

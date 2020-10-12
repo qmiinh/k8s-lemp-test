@@ -2,8 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: database-deployment
+  namespace: lemp-ns
   labels:
-    Deployment: LEMP
+    Deployment: lemp
 spec:
   replicas: 1
   selector:
@@ -12,10 +13,10 @@ spec:
   template:
     metadata:
       labels:
-        app: dbi
+        app: db
     spec:
       containers:
-      - name: LEMP-db
+      - name: lemp-db
         image: mariadb:latest
         envFrom:
         - configMapRef:
